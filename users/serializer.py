@@ -18,9 +18,3 @@ class PaymentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-#
-#
-# class CreateUserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ("id", "email", "username", "password", 'phone', 'city', 'avatar')

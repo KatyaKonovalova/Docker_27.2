@@ -75,3 +75,6 @@ class Payment(models.Model):
         verbose_name = "Платеж"
         verbose_name_plural = "Платежи"
         ordering = ["-payments_date"]  # выбор в обратную сторону (-)
+
+    def __str__(self):
+        return self.payment_sum

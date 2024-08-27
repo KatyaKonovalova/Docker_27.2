@@ -19,7 +19,6 @@ from users.permissions import IsModer, IsOwner
 from courses.tasks import mail_update_course_info
 
 
-
 @method_decorator(
     name="list",
     decorator=swagger_auto_schema(

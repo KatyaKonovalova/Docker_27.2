@@ -125,23 +125,25 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_BROKER_URL')
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_BROKER_URL")
 
 CELERY_BEAT_SCHEDULE = {
-    'check_user_activity': {
-        'task': 'courses.tasks.check_user_activity',  # Путь к задаче
-        'schedule': timedelta(weeks=4),  # Расписание выполнения задачи (например, каждый день)
+    "check_user_activity": {
+        "task": "courses.tasks.check_user_activity",  # Путь к задаче
+        "schedule": timedelta(
+            weeks=4
+        ),  # Расписание выполнения задачи (например, каждый день)
     }
 }
 
 
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL') == 'True'
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL") == "True"
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS") == "True"
 
 
 SERVER_EMAIL = EMAIL_HOST_USER

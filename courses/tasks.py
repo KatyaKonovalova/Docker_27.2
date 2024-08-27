@@ -15,20 +15,24 @@ def mail_update_course_info(course_id):
     for subscription in course_subscriptions:
         send_mail(
             subject="Обновление материалов курса",
-            message=f'Курс {subscription.course.title} был обновлен.',
+            message=f"Курс {subscription.course.title} был обновлен.",
             from_email=EMAIL_HOST_USER,
             recipient_list=[subscription.user.email],
-            fail_silently=False
+            fail_silently=False,
         )
 
 
 @shared_task
 def check_user_activity():
     """Функция проверки активности пользователя"""
-    users = User.objects.filter(is_active=True, is_superuser=False, last_login__isnull=False)
+    users = User.objects.filter(
+        is_active=True, is_superuser=False, last_login__isnull=False
+    )
     if users.exists():
         for user in users:
             print("start!")
-            if datetime.datetime.now(pytz.timezone("Europe/Moscow")) - user.last_login > datetime.timedelta(weeks=4):
+            if datetime.datetime.now(
+                pytz.timezone("Europe/Moscow")
+            ) - user.last_login > datetime.timedelta(weeks=4):
                 user.is_active = False
                 user.save()

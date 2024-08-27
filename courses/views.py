@@ -1,8 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
-from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import filters
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
@@ -18,6 +16,8 @@ from rest_framework.viewsets import ModelViewSet
 from courses.paginations import CoursePaginator, LessonPaginator
 from courses.serializer import *
 from users.permissions import IsModer, IsOwner
+from courses.tasks import mail_update_course_info
+
 
 
 @method_decorator(
@@ -40,6 +40,11 @@ class CourseViewSet(ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def perform_update(self, serializer):
+        updated_course = serializer.save()
+        mail_update_course_info.delay(updated_course)
+        updated_course.save()
 
     def get_permissions(self):
         if self.action == "create":

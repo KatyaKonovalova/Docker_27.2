@@ -15,11 +15,11 @@ from users.views import (
 app_name = UsersConfig.name
 
 urlpatterns = [
-    path("register/", UserCreateAPIView.as_view(), name="user_register"),
+    path("register/", UserCreateAPIView.as_view(), name="user-register"),
     path("detail/<int:pk>/", UserRetrieveView.as_view(), name="user-detail"),
     path("update/<int:pk>/", UserUpdateView.as_view(), name="user-update"),
     path("delete/<int:pk>/", UserDeleteView.as_view(), name="user-delete"),
-    path("users_list/", UserListView.as_view(), name="users_list"),
+    path("users_list/", UserListView.as_view(), name="users-list"),
     path(
         "login/",
         TokenObtainPairView.as_view(permission_classes=(AllowAny,)),
@@ -28,7 +28,7 @@ urlpatterns = [
     path(
         "token/refresh/",
         TokenRefreshView.as_view(permission_classes=(AllowAny,)),
-        name="token_refresh",
+        name="token-refresh",
     ),
-    path("payment/", PaymentCreateAPIView.as_view(), name="payment_list"),
+    path("payment/", PaymentCreateAPIView.as_view(), name="payment-list"),
 ]
